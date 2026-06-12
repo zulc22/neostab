@@ -1,0 +1,52 @@
+space is escaped as \040 (i don't think there are any other special chars that aren't whitespace)
+gvfs params are URL escaped[1] ( =%20) - does NOT seem to work with much more readable ' =+' syntax
+
+gvfs flags i know of:
+	x-gvfs-name=... [1]
+	x-gvfs-icon=... [1]
+	x-gvfs-symbolic-icon=... [1]	
+	x-gvfs-show (flag) [1]
+	x-gvfs-hide (flag) [1]
+	x-gvfs-trash (flag) [2]
+	x-gvfs-no-trash (flag) [2]
+
+[1]: https://github.com/GNOME/gvfs/blob/master/monitor/udisks2/what-is-shown.txt
+[2]: https://github.com/GNOME/gvfs/blob/7db465b8235d2f433b62d91fe7a768a3322c743f/daemon/trashlib/trashwatcher.c#L229
+
+systemd flags i know of:
+	x-systemd.mount-timeout=... [3]
+	x-systemd.automount (flag) [3]
+	x-systemd.{wants,requires,before,after,{want,require}{d-by,s-mounts-for}}=... [3]
+		dependencies
+	x-systemd.graceful-option=... [3]
+		optional mount options that will be removed on failure?
+	x-systemd.device-bound=... [3]
+	x-systemd.idle-timeout=... [3]
+		TimeoutIdleSec
+	x-systemd.device-timeout=... [3]
+		tell systemd to wait for the device
+		supports s,min.h,ms units
+	x-systemd.mount-timeout=... [3]
+		give up trying to mount if it takes longer
+		than specified
+		supports s,min,h,ms units
+	x-systemd.makefs (flag) [3]
+		automatically format the device if no fs signatures are found
+	x-systemd.growfs (flag) [3]
+		make the filesystem use max available space
+		'only certain filesystem types are supported' (shocker, right)
+	x-systemd.pcrfs (flag) [3]
+		i don't know what PCR is.
+	x-systemd.validatefs (flag) [3]
+		'validate the filesystem' with 'systemd-validatefs@.service'
+	x-systemd.rw-only (flag) [3]
+		do not allow the system to mount it as read-only
+	_netdev (flag) [3] (!systemd?)
+		directly informs the system that this is a network drive
+	noauto (flag) [3] (!systemd?)
+		do not mount automatically during boot (overridden by x-systemd-automount)
+		i think this is still relevant for initramfs stuff
+	auto (flag) [3] (!systemd?)
+		mount automatically during boot
+
+[3]: https://www.freedesktop.org/software/systemd/man/latest/systemd.mount.html
