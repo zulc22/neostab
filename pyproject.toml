@@ -26,6 +26,9 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
+[project.urls]
+Homepage = "https://github.com/zulc22/neostab"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
