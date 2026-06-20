@@ -1,6 +1,6 @@
 [project]
 name = "neostab"
-version = "0.1.0"
+version = "0.1.1"
 description = "yaml-inspired fstab generator"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -50,3 +50,9 @@ fixable = ["ALL"]
 [tool.ruff.format]
 quote-style = "single"
 indent-style = "tab"
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true

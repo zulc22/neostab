@@ -364,8 +364,12 @@ def install_stabs(stabs, simulate=False):
 				if simulate:
 					print('Would make dir:', mount['mountpoint'])
 				else:
-					print('makedirs', mount['mountpoint'])
-					os.makedirs(mount['mountpoint'], mode)
+					print('makedirs', mount['mountpoint'], end='', flush=True)
+					try:
+						os.makedirs(mount['mountpoint'], mode)
+						print()
+					except os.FileExistsError:
+						print(' -- failed, continuing')
 
 			if 'mode' in mount:
 				ensure_mode(mount['mountpoint'], mode)
